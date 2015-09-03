@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/CountriesCodeMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/CurrencyCodeMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/DimensionMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/RegierungsbezirkCodeMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/ResourcesMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/RiskLevelMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/RolesMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/RolesResourcesMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/SystemConfigMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/UsersMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/UsersRolesMapper.xml" />
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/DeptMapper.xml"/>
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/AssignDeptMapper.xml"/>
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/AssignUserListMapper.xml"/>
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/AssignUserResourceMapper.xml"/>
+		<mapper resource="mysql/cn/com/bsfit/frms/portal/base/sqlmap/AssignConfigMapper.xml"/>
+	</mappers>
+</configuration>

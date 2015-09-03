@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<properties resource="testgeneratorConfig_mysql.properties" />
+
+	<classPathEntry location="${jdbc.path}" />
+
+	<context id="frms-portal" targetRuntime="MyBatis3">
+		<plugin type="cn.com.bsfit.frms.portal.base.plugins.mysql.PaginationPlugin" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${jdbc.driverClassName}"
+			connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="cn.com.bsfit.frms.portal.base.pojo"
+			targetProject="frms-portal-base/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mysql.cn.com.bsfit.frms.portal.base.sqlmap"
+			targetProject="frms-portal-base/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetProject="frms-portal-base" targetPackage="cn.com.bsfit.frms.portal.base.mapper">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+ 		<table schema="frms-portal" tableName="assign_config" domainObjectName="AssignConfig">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms-portal" tableName="assign_user_list" domainObjectName="AssignUserList">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms-portal" tableName="assign_user_resource" domainObjectName="AssignUserResource">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms-portal" tableName="assign_dept" domainObjectName="AssignDept">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+        
+		<table schema="frms_portal" tableName="COUNTRIES_CODE" domainObjectName="CountriesCode">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms_portal" tableName="CURRENCY_CODE" domainObjectName="CurrencyCode">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms_portal" tableName="DEPT" domainObjectName="Dept">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms_portal" tableName="DIMENSION" domainObjectName="Dimension">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="REGIERUNGSBEZIRK_CODE" domainObjectName="RegierungsbezirkCode">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="frms_portal" tableName="RESOURCES" domainObjectName="Resources">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="RISK_LEVEL" domainObjectName="RiskLevel">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="ROLES" domainObjectName="Roles">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="ROLES_RESOURCES" domainObjectName="RolesResources">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="SYSTEM_CONFIG" domainObjectName="SystemConfig">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="USERS" domainObjectName="Users">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+		<table schema="frms_portal" tableName="USERS_ROLES" domainObjectName="UsersRoles">
+			<property name="useActualColumnNames" value="false" />
+			<property name="constructorBased" value="false" />
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey identity="true" column="ID" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		
+	</context>
+</generatorConfiguration>

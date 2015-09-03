@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.bsfit.frms.portal.base.mapper.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.bsfit.frms.portal.base.pojo.Resources" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="ENABLED" property="enabled" jdbcType="SMALLINT" />
+    <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+    <result column="RESOURCE_LEVEL" property="resourceLevel" jdbcType="INTEGER" />
+    <result column="RESOURCE_TYPE" property="resourceType" jdbcType="INTEGER" />
+    <result column="RESOURCE_DESC" property="resourceDesc" jdbcType="VARCHAR" />
+    <result column="RESOURCE_CODE" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="RESOURCE_URL" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="RESOURCE_ICON" property="resourceIcon" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFER" property="modifer" jdbcType="VARCHAR" />
+    <result column="ORDER_FIELD" property="orderField" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PARENT_ID, ENABLED, RESOURCE_NAME, RESOURCE_LEVEL, RESOURCE_TYPE, RESOURCE_DESC, 
+    RESOURCE_CODE, RESOURCE_URL, RESOURCE_ICON, CREATE_TIME, UPDATE_TIME, MODIFER, ORDER_FIELD
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.bsfit.frms.portal.base.pojo.ResourcesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resources
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.bsfit.frms.portal.base.pojo.ResourcesExample" >
+    delete from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.bsfit.frms.portal.base.pojo.Resources" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into resources (PARENT_ID, ENABLED, RESOURCE_NAME, 
+      RESOURCE_LEVEL, RESOURCE_TYPE, RESOURCE_DESC, 
+      RESOURCE_CODE, RESOURCE_URL, RESOURCE_ICON, 
+      CREATE_TIME, UPDATE_TIME, MODIFER, 
+      ORDER_FIELD)
+    values (#{parentId,jdbcType=INTEGER}, #{enabled,jdbcType=SMALLINT}, #{resourceName,jdbcType=VARCHAR}, 
+      #{resourceLevel,jdbcType=INTEGER}, #{resourceType,jdbcType=INTEGER}, #{resourceDesc,jdbcType=VARCHAR}, 
+      #{resourceCode,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR}, #{resourceIcon,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{modifer,jdbcType=VARCHAR}, 
+      #{orderField,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bsfit.frms.portal.base.pojo.Resources" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME,
+      </if>
+      <if test="resourceLevel != null" >
+        RESOURCE_LEVEL,
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE,
+      </if>
+      <if test="resourceDesc != null" >
+        RESOURCE_DESC,
+      </if>
+      <if test="resourceCode != null" >
+        RESOURCE_CODE,
+      </if>
+      <if test="resourceUrl != null" >
+        RESOURCE_URL,
+      </if>
+      <if test="resourceIcon != null" >
+        RESOURCE_ICON,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="modifer != null" >
+        MODIFER,
+      </if>
+      <if test="orderField != null" >
+        ORDER_FIELD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=SMALLINT},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceLevel != null" >
+        #{resourceLevel,jdbcType=INTEGER},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceDesc != null" >
+        #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null" >
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceIcon != null" >
+        #{resourceIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifer != null" >
+        #{modifer,jdbcType=VARCHAR},
+      </if>
+      <if test="orderField != null" >
+        #{orderField,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.bsfit.frms.portal.base.pojo.ResourcesExample" resultType="java.lang.Integer" >
+    select count(1) from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update resources
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.enabled != null" >
+        ENABLED = #{record.enabled,jdbcType=SMALLINT},
+      </if>
+      <if test="record.resourceName != null" >
+        RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceLevel != null" >
+        RESOURCE_LEVEL = #{record.resourceLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceType != null" >
+        RESOURCE_TYPE = #{record.resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceDesc != null" >
+        RESOURCE_DESC = #{record.resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceCode != null" >
+        RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceUrl != null" >
+        RESOURCE_URL = #{record.resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceIcon != null" >
+        RESOURCE_ICON = #{record.resourceIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifer != null" >
+        MODIFER = #{record.modifer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderField != null" >
+        ORDER_FIELD = #{record.orderField,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update resources
+    set ID = #{record.id,jdbcType=INTEGER},
+      PARENT_ID = #{record.parentId,jdbcType=INTEGER},
+      ENABLED = #{record.enabled,jdbcType=SMALLINT},
+      RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+      RESOURCE_LEVEL = #{record.resourceLevel,jdbcType=INTEGER},
+      RESOURCE_TYPE = #{record.resourceType,jdbcType=INTEGER},
+      RESOURCE_DESC = #{record.resourceDesc,jdbcType=VARCHAR},
+      RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+      RESOURCE_URL = #{record.resourceUrl,jdbcType=VARCHAR},
+      RESOURCE_ICON = #{record.resourceIcon,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      MODIFER = #{record.modifer,jdbcType=VARCHAR},
+      ORDER_FIELD = #{record.orderField,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bsfit.frms.portal.base.pojo.Resources" >
+    update resources
+    <set >
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=SMALLINT},
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceLevel != null" >
+        RESOURCE_LEVEL = #{resourceLevel,jdbcType=INTEGER},
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE = #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceDesc != null" >
+        RESOURCE_DESC = #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null" >
+        RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceIcon != null" >
+        RESOURCE_ICON = #{resourceIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifer != null" >
+        MODIFER = #{modifer,jdbcType=VARCHAR},
+      </if>
+      <if test="orderField != null" >
+        ORDER_FIELD = #{orderField,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bsfit.frms.portal.base.pojo.Resources" >
+    update resources
+    set PARENT_ID = #{parentId,jdbcType=INTEGER},
+      ENABLED = #{enabled,jdbcType=SMALLINT},
+      RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      RESOURCE_LEVEL = #{resourceLevel,jdbcType=INTEGER},
+      RESOURCE_TYPE = #{resourceType,jdbcType=INTEGER},
+      RESOURCE_DESC = #{resourceDesc,jdbcType=VARCHAR},
+      RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR},
+      RESOURCE_ICON = #{resourceIcon,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      MODIFER = #{modifer,jdbcType=VARCHAR},
+      ORDER_FIELD = #{orderField,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByResourceId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	SELECT <include refid="Base_Column_List" />
+	from RESOURCES where resource_id = #{resourceId} and ENABLED = 1
+	ORDER BY ORDER_FIELD ASC
+  </select>
+  	
+  <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	SELECT <include refid="Base_Column_List" />
+	from RESOURCES where parent_id =#{parentId} and ENABLED = 1 
+	ORDER BY ORDER_FIELD ASC
+  </select>
+  
+  <select id="selectByUsersId" resultMap="BaseResultMap">
+    SELECT DISTINCT re.ID, re.PARENT_ID, re.ENABLED, re.RESOURCE_NAME, re.RESOURCE_LEVEL, 
+    re.RESOURCE_TYPE, re.RESOURCE_DESC, re.RESOURCE_CODE, re.RESOURCE_URL, re.RESOURCE_ICON, 
+    re.CREATE_TIME, re.UPDATE_TIME, re.MODIFER, re.ORDER_FIELD FROM USERS u
+	LEFT OUTER JOIN USERS_ROLES ur ON u.ID = ur.USERS_ID
+	LEFT OUTER JOIN ROLES ro ON ur.ROLES_ID = ro.ID
+	LEFT OUTER JOIN ROLES_RESOURCES rr ON rr.ROLES_ID = ro.ID
+	LEFT OUTER JOIN RESOURCES re ON re.ID = rr.RESOURCES_ID
+	WHERE u.ID = #{usersId} AND ro.ENABLED = 1 AND re.ENABLED = 1 AND re.ID != 1
+	<if test="resourcesType != null">
+        AND RESOURCE_TYPE = #{resourcesType,jdbcType=DECIMAL} 
+    </if>
+	ORDER BY ORDER_FIELD ASC
+  </select>
+</mapper>

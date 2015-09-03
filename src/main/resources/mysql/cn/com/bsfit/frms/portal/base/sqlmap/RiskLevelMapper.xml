@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.bsfit.frms.portal.base.mapper.RiskLevelMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.bsfit.frms.portal.base.pojo.RiskLevel" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="LEVEL_VAL" property="levelVal" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="READONLY" property="readonly" jdbcType="SMALLINT" />
+    <result column="LEVEL_MIN" property="levelMin" jdbcType="INTEGER" />
+    <result column="LEVEL_MAX" property="levelMax" jdbcType="INTEGER" />
+    <result column="ENABLED" property="enabled" jdbcType="SMALLINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFER" property="modifer" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, LEVEL_VAL, NAME, READONLY, LEVEL_MIN, LEVEL_MAX, ENABLED, CREATE_TIME, UPDATE_TIME, 
+    MODIFER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from risk_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="MysqlSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from risk_level
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from risk_level
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevelExample" >
+    delete from risk_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into risk_level (LEVEL_VAL, NAME, READONLY, 
+      LEVEL_MIN, LEVEL_MAX, ENABLED, 
+      CREATE_TIME, UPDATE_TIME, MODIFER
+      )
+    values (#{levelVal,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{readonly,jdbcType=SMALLINT}, 
+      #{levelMin,jdbcType=INTEGER}, #{levelMax,jdbcType=INTEGER}, #{enabled,jdbcType=SMALLINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{modifer,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into risk_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="levelVal != null" >
+        LEVEL_VAL,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="readonly != null" >
+        READONLY,
+      </if>
+      <if test="levelMin != null" >
+        LEVEL_MIN,
+      </if>
+      <if test="levelMax != null" >
+        LEVEL_MAX,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="modifer != null" >
+        MODIFER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="levelVal != null" >
+        #{levelVal,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="readonly != null" >
+        #{readonly,jdbcType=SMALLINT},
+      </if>
+      <if test="levelMin != null" >
+        #{levelMin,jdbcType=INTEGER},
+      </if>
+      <if test="levelMax != null" >
+        #{levelMax,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifer != null" >
+        #{modifer,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevelExample" resultType="java.lang.Integer" >
+    select count(1) from risk_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update risk_level
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelVal != null" >
+        LEVEL_VAL = #{record.levelVal,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readonly != null" >
+        READONLY = #{record.readonly,jdbcType=SMALLINT},
+      </if>
+      <if test="record.levelMin != null" >
+        LEVEL_MIN = #{record.levelMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelMax != null" >
+        LEVEL_MAX = #{record.levelMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.enabled != null" >
+        ENABLED = #{record.enabled,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifer != null" >
+        MODIFER = #{record.modifer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update risk_level
+    set ID = #{record.id,jdbcType=INTEGER},
+      LEVEL_VAL = #{record.levelVal,jdbcType=BIGINT},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      READONLY = #{record.readonly,jdbcType=SMALLINT},
+      LEVEL_MIN = #{record.levelMin,jdbcType=INTEGER},
+      LEVEL_MAX = #{record.levelMax,jdbcType=INTEGER},
+      ENABLED = #{record.enabled,jdbcType=SMALLINT},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      MODIFER = #{record.modifer,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevel" >
+    update risk_level
+    <set >
+      <if test="levelVal != null" >
+        LEVEL_VAL = #{levelVal,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="readonly != null" >
+        READONLY = #{readonly,jdbcType=SMALLINT},
+      </if>
+      <if test="levelMin != null" >
+        LEVEL_MIN = #{levelMin,jdbcType=INTEGER},
+      </if>
+      <if test="levelMax != null" >
+        LEVEL_MAX = #{levelMax,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifer != null" >
+        MODIFER = #{modifer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bsfit.frms.portal.base.pojo.RiskLevel" >
+    update risk_level
+    set LEVEL_VAL = #{levelVal,jdbcType=BIGINT},
+      NAME = #{name,jdbcType=VARCHAR},
+      READONLY = #{readonly,jdbcType=SMALLINT},
+      LEVEL_MIN = #{levelMin,jdbcType=INTEGER},
+      LEVEL_MAX = #{levelMax,jdbcType=INTEGER},
+      ENABLED = #{enabled,jdbcType=SMALLINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      MODIFER = #{modifer,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="MysqlSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.begin} , #{page.length} ]]>
+    </if>
+  </sql>
+</mapper>
